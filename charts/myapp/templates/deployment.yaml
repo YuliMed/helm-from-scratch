@@ -18,3 +18,15 @@ spec:
           args: {{ .Values.image.command }}
           ports:
             - containerPort: {{ .Values.service.port }}
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: message
+            - name: API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: apiToken
+
