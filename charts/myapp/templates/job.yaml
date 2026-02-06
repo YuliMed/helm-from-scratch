@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-job
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: job
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          args: {{ .Values.image.command }}
