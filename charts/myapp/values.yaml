@@ -1,0 +1,13 @@
+replicaCount: 1
+
+image:
+  repository: hashicorp/http-echo
+  tag: "0.3.1"
+  command:
+    - "-text=Hello from Helm"
+
+service:
+  port: 5678
+
+config:
+  message: "Hello from Configmap"
