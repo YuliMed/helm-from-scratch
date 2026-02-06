@@ -11,3 +11,6 @@ service:
 
 config:
   message: "Hello from Configmap"
+
+secret:
+  apiToken: "secret-token"
