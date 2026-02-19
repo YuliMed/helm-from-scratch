@@ -13,19 +13,29 @@ charts/myapp/
     ├── configmap.yaml
     └── secret.yaml
 
-Deployment – Runs the main application with a configurable number of replicas
 
-Service – Exposes the application internally in the cluster
+## Included Resources Overview
 
-DaemonSet – Ensures one pod runs on each node
+| Resource     | Purpose                                           | Common Use Case                              | Enabled by Default |
+|--------------|---------------------------------------------------|----------------------------------------------|--------------------|
+| Deployment   | Runs the main stateless/cron-like application     | Web/API servers, background workers          | Yes                |
+| Service      | Exposes the application inside the cluster        | Internal load balancing & service discovery  | Yes                |
+| DaemonSet    | Ensures exactly one pod per node                  | Node-level agents, logging, metrics collectors | No               |
+| Job          | Runs a task to completion (one-off)               | Migrations, batch processing, init tasks     | No                 |
+| CronJob      | Runs tasks on a schedule                          | Nightly jobs, periodic syncs, reports        | No                 |
+| ConfigMap    | Stores non-sensitive configuration                | App settings, feature flags, environment     | Yes                |
+| Secret       | Stores sensitive data (base64-encoded)            | Tokens, passwords, private keys              | Yes (empty)        |
 
-Job – Executes a one-time task
+## Installation
 
-CronJob – Executes a scheduled task
+### Basic install / upgrade (recommended one-liner)
 
-ConfigMap – Stores non-sensitive configuration
+```bash
 
-Secret – Stores sensitive data such as API tokens
+
+helm upgrade --install myapp ./charts/myapp \
+  --namespace myapp-system \
+  --create-namespace
 
 
 
